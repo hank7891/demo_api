@@ -6,7 +6,8 @@ func main() {
 	// variabletest()
 	// arrayTest()
 	// sliceTest()
-	mapTest()
+	// mapTest()
+	controlTest()
 }
 
 // 變數練習
@@ -182,4 +183,72 @@ func mapTest() {
 	/**
 	map(映射) slice(切片) 陣列(陣列) 三者的區別，陣列是一個固定大小的序列，切片是基於陣列的可動態調整大小的視圖，而映射是一個鍵值對的集合。
 	*/
+}
+
+// 控制結構練習
+func controlTest() {
+	// if
+	a := 1
+	if a == 1 {
+		fmt.Println("a == 1")
+	} else {
+		fmt.Println("a != 1")
+	}
+
+	// if 也可以在判斷前先執行一個語句
+	if b := 1; b == 1 {
+		fmt.Println("b == 1")
+	} else {
+		fmt.Println("b != 1")
+	}
+
+	// else if
+	if c := 2; c == 1 {
+		fmt.Println("c == 1")
+	} else if c == 2 {
+		fmt.Println("c == 2")
+	} else {
+		fmt.Println("c != 1 && c != 2")
+	}
+
+	// if 可以省略判斷式，當判斷式為 true 時執行
+	if true {
+		fmt.Println("Is true")
+	}
+
+	// switch
+	switch i := 1; i {
+	case 1:
+		fmt.Println("1")
+	case 2, 3:
+		fmt.Println("2 or 3")
+	case 4:
+		fallthrough
+	case 5:
+		fmt.Println("5")
+	}
+
+	// switch 比對
+	i := 5
+	switch {
+	case i > 5:
+		fmt.Println(i, "> 5")
+	case i < 5:
+		fmt.Println(i, "< 5")
+	case i == 5:
+		fmt.Println(i, "= 5")
+	}
+
+	// for
+	for i := 0; i < 5; i++ {
+		fmt.Println(i)
+	}
+
+	// for 可省略前後語句
+	j := 1
+	for j < 5 {
+		j += j
+	}
+	fmt.Println("for 測試")
+	fmt.Println(j)
 }
