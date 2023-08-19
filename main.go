@@ -5,7 +5,8 @@ import "fmt"
 func main() {
 	// variabletest()
 	// arrayTest()
-	sliceTest()
+	// sliceTest()
+	mapTest()
 }
 
 // 變數練習
@@ -141,5 +142,44 @@ func sliceTest() {
 	 * 切片是基於陣列的一個“視圖”，它指向一個底層的陣列，但可以變長或變短。
 	 * 切片的宣告方式為 var sliceName []elementType。
 	 * 在你之前提供的程式碼中，使用切片字面值初始化切片的方式確實看起來類似於陣列的宣告方式，但它實際上是創建了一個切片，而不是一個固定大小的陣列。因為切片具有動態大小和彈性，所以在大多數情況下，我們更傾向於使用切片來處理集合數據，而不是使用固定大小的陣列。
+	*/
+}
+
+// map 練習
+func mapTest() {
+	// 宣告一個 map
+	var map1 map[string]int
+
+	// 使用前需要初始化 map，不然會報錯(可以試試看把下面這行註解掉)
+	// map1['a'] = 1
+	map1 = make(map[string]int)
+	fmt.Println(map1)
+
+	// 當然可以宣告時同時初始化 map
+	map2 := make(map[string]int)
+	map2["a"] = 1
+	fmt.Println(map2)
+
+	// 宣告時同時初始化 map，並給予內容
+	map3 := map[string]int{
+		"a": 1,
+		"b": 2,
+	}
+	fmt.Println(map3)
+
+	// 刪除 map 中的元素
+	delete(map3, "a")
+	fmt.Println(map3)
+
+	// 判斷 map 中是否存在某個 key
+	// 這裡的 ok 是一個 bool 型態的變數，如果存在 ok 會是 true，反之則為 false
+	name, ok := map3["a"]
+	fmt.Println(name, ok)
+
+	name, ok = map3["b"]
+	fmt.Println(name, ok)
+
+	/**
+	map(映射) slice(切片) 陣列(陣列) 三者的區別，陣列是一個固定大小的序列，切片是基於陣列的可動態調整大小的視圖，而映射是一個鍵值對的集合。
 	*/
 }
