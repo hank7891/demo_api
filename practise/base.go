@@ -336,3 +336,23 @@ func DeferTest() {
 	 * 清理資源
 	*/
 }
+
+// defer 製造 try catch 練習
+func DeferTryCatchTest() {
+	// defer 會在函式結束前執行，所以可以用來製造 try catch 的效果
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println(err)
+		}
+	}()
+
+	fmt.Println("Start")
+	panic("Oops! An error occurred")
+	fmt.Println("hello")
+
+	/**
+	特別介紹 panic 和 recover 兩個內建函示。
+	 * panic 會中斷程式，並且執行 defer，所以可以用來製造 try catch 的效果。
+	 * recover 可以捕捉 panic 的錯誤，並且讓程式繼續執行。
+	*/
+}

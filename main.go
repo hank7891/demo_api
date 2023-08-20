@@ -17,5 +17,6 @@ func main() {
 	// 	Age:  30,
 	// }
 	// user.FuncStructTest()
-	practise.DeferTest()
+	// practise.DeferTest()
+	practise.DeferTryCatchTest()
 }
