@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
 	// variabletest()
@@ -265,4 +268,36 @@ func channelTest() {
 
 	// 從通道中讀取數據
 	fmt.Println(<-ch)
+
+	// channel 有個 select 應用，可以讓 channel 有非同步的效果
+	ch1 := make(chan int)
+	ch2 := make(chan int)
+
+	go func() {
+		time.Sleep(2 * time.Second)
+		ch1 <- 1
+	}()
+
+	go func() {
+		time.Sleep(3 * time.Second)
+		ch2 <- 2
+	}()
+
+	select {
+	case num := <-ch1:
+		fmt.Println("Received from ch1:", num)
+	case num := <-ch2:
+		fmt.Println("Received from ch2:", num)
+	}
+
+	// 一個 select 僅會監聽一次，可以使用 for 迴圈讓 select 監聽多次
+	// 記得註解上方單次監聽的 select
+	// for i := 0; i < 2; i++ {
+	// 	select {
+	// 	case num := <-ch1:
+	// 		fmt.Println("Received from ch1:", num)
+	// 	case num := <-ch2:
+	// 		fmt.Println("Received from ch2:", num)
+	// 	}
+	// }
 }
