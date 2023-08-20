@@ -7,7 +7,8 @@ func main() {
 	// arrayTest()
 	// sliceTest()
 	// mapTest()
-	controlTest()
+	// controlTest()
+	channelTest()
 }
 
 // 變數練習
@@ -251,4 +252,17 @@ func controlTest() {
 	}
 	fmt.Println("for 測試")
 	fmt.Println(j)
+}
+
+// 通道練習
+// 通道（Channel）是一種用於在不同的 Go 協程（Goroutine）之間進行通訊和同步的機制。通道提供了一種安全的方法來傳遞數據，確保協程之間的同步和互斥。
+func channelTest() {
+	// 建立一個通道
+	ch := make(chan int)
+
+	// 通道的寫入和讀取都是阻塞的，所以必須在不同的協程中進行
+	go func() { ch <- 1 }()
+
+	// 從通道中讀取數據
+	fmt.Println(<-ch)
 }
