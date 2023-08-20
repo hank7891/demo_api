@@ -12,9 +12,10 @@ func main() {
 	// practise.ControlTest()
 	// practise.ChannelTest()
 	// practise.StructTest()
-	user := &practise.User{
-		Name: "hank",
-		Age:  30,
-	}
-	user.FuncStructTest()
+	// user := &practise.User{
+	// 	Name: "hank",
+	// 	Age:  30,
+	// }
+	// user.FuncStructTest()
+	practise.DeferTest()
 }

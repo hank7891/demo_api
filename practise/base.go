@@ -319,3 +319,20 @@ type User struct {
 func (user *User) FuncStructTest() {
 	fmt.Println(user.Name, user.Age)
 }
+
+// defer 練習
+// defer 會在函式結束前執行，可以用來釋放資源
+func DeferTest() {
+	// 可以看到雖然 defer 在最前面，但是會在函式結束前執行，所以會先印出 hello
+	defer fmt.Println("world")
+	fmt.Println("hello")
+
+	/**
+	因為以上特性 defer 通常用在。
+	 * 資源釋放
+	 * 記錄紀錄
+	 * 解鎖操作
+	 * 執行結束後操作
+	 * 清理資源
+	*/
+}
