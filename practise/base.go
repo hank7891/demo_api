@@ -292,3 +292,30 @@ func ChannelTest() {
 	// 	}
 	// }
 }
+
+// 結構練習
+func StructTest() {
+	type User struct {
+		Name string
+		Age  int
+	}
+
+	// 宣告一個 User
+	user := User{
+		Name: "hank",
+		Age:  30,
+	}
+
+	// 取得 User 的屬性
+	fmt.Println(user.Name, user.Age)
+}
+
+// 函示串接結構練習
+type User struct {
+	Name string
+	Age  int
+}
+
+func (user *User) FuncStructTest() {
+	fmt.Println(user.Name, user.Age)
+}
