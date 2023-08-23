@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	practise.Variabletest()
+	// practise.Variabletest()
 	// practise.ArrayTest()
 	// practise.SliceTest()
 	// practise.MapTest()
@@ -19,5 +19,7 @@ func main() {
 	// user.FuncStructTest()
 	// practise.DeferTest()
 	// practise.DeferTryCatchTest()
-	practise.SetRoute()
+
+	// practise.SetRoute()
+	practise.GinSetRoute()
 }
