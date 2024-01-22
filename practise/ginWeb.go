@@ -15,9 +15,15 @@ Gin 是一套使用 golang 打造的 web 框架，官方自己的介紹如下
 */
 
 import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/generative-ai-go/genai"
+	"google.golang.org/api/option"
 )
 
 // Gin 練習
@@ -31,6 +37,8 @@ func GinSetRoute() {
 	server.GET("/", ginPage)
 	server.POST("/", ginPost)
 	server.POST("/formdata", ginPostFormData)
+
+	server.GET("/google.gpt", googleGpt)
 
 	// 啟動服務
 	server.Run(":8888")
@@ -78,9 +86,64 @@ func ginPostFormData(c *gin.Context) {
 		return
 	}
 
+	a := returnTest()
+
 	c.JSON(http.StatusOK, gin.H{
 		"message":  "Data received successfully",
 		"username": username,
 		"password": password,
+		"a":        a,
 	})
+}
+
+func googleGpt(c *gin.Context) {
+	ctx := context.Background()
+	// Access your API key as an environment variable (see "Set up your API key" above)
+	client, err := genai.NewClient(ctx, option.WithAPIKey("AIzaSyDNEb6CPs_MkVSU9gnnVLN1x7O6OyBJ78s"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer client.Close()
+
+	model := client.GenerativeModel("gemini-pro")
+	resp, err := model.GenerateContent(ctx, genai.Text("誰是 NBA 的 GOAT？"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	respJSON, err := json.Marshal(resp)
+	if err != nil {
+		fmt.Println("無法將資料轉換成 JSON:", err)
+		return
+	}
+
+	// 頁面上輸出 google.gpt
+	c.String(http.StatusOK, string(respJSON))
+}
+
+func GoogleGptTest() {
+
+	ctx := context.Background()
+	// Access your API key as an environment variable (see "Set up your API key" above)
+	client, err := genai.NewClient(ctx, option.WithAPIKey("AIzaSyDNEb6CPs_MkVSU9gnnVLN1x7O6OyBJ78s"))
+	if err != nil {
+		fmt.Println("E1: ")
+		log.Fatal(err)
+	}
+	defer client.Close()
+
+	model := client.GenerativeModel("gemini-pro")
+	resp, err := model.GenerateContent(ctx, genai.Text("2022 MLB 世界大賽冠軍是誰？"))
+	if err != nil {
+		fmt.Println("E2: ")
+		log.Fatal(err)
+	}
+
+	respJSON, err := json.Marshal(resp)
+	if err != nil {
+		fmt.Println("無法將資料轉換成 JSON:", err)
+		return
+	}
+
+	fmt.Println(string(respJSON))
 }
